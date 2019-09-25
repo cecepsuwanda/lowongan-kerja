@@ -1,6 +1,6 @@
 <?php
 session_start();
-include"koneksi.php";
+include"config/koneksi.php";
 include"config/kodeauto.php";
 include "config/fungsi_indotgl.php";
 ?>
@@ -58,11 +58,12 @@ function MM_validateForm() { //v4.0
               <li><a href="./" ><img src="images/home.png" width='15' height='15' > Home</a></li>
               <li><a href="?page=profile" ><img src="images/user.ico" width='15' height='15' > &nbsp;Profile</a> </li>
               <li><a href="?page=contact" title="">&nbsp;&nbsp;&nbsp;<img src="images/contact.png" width='15' height='15' > &nbsp;Contact</a></li>
-              <?
+              <?php
 			  if(empty($_SESSION['username'])){
 			  ?>
 			  <li><a href="?page=registrasi"><img src="images/daftar.png" width='15' height='15' > Registrasi</a></li>
-			  <?}else{}?>
+			  <?php }
+			  ?>
 			  <li><a href="?page=lowongan"><img src="images/lowongan.png" width='19' height='15' > Lowongan</a></li>
        	  </ul>
     </nav>
@@ -73,7 +74,7 @@ function MM_validateForm() { //v4.0
 				<?php
 				if(!empty($_SESSION['username'])){				
 				?>
-				<h3><img src="images/chat1.png" width='20' height='20' > Hallo <?echo$_SESSION['namalengkap'];?> !</h2>
+				<h3><img src="images/chat1.png" width='20' height='20' > Hallo <?php echo $_SESSION['namalengkap'];?> !</h2>
                 <div class='menu_left'><a href="./" class="last"><img src="images/left.png" width='15' height='10' > Home</a></div>
                 <div class='menu_left'><a href="?page=setting_akun" class="last"><img src="images/left.png" width='15' height='10' > Setting Akun</a></div>
 				<div class='menu_left'><a href="./logout.php" class="last"><img src="images/left.png" width='15' height='10' > Log Out</a></div>											
@@ -116,7 +117,7 @@ function MM_validateForm() { //v4.0
           </form>  
 				
 				
-				<?	
+				<?php	
 				}
 				?>
 				
@@ -124,19 +125,19 @@ function MM_validateForm() { //v4.0
 				<div class='judul_left'><img src="images/lowongan.png" width='15' height='15' > Lowongan Terbaru</div>
 				
 				<marquee-off onmouseover=this.stop() height=250  onmouseout=this.start() BEHAVIOR=alternate  direction="down" >
-				<?
-				$tampil=mysql_query("SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan ORDER BY id_lowongan DESC limit 4");
+				<?php
+				$tampil=mysqli_query($connect,"SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan ORDER BY id_lowongan DESC limit 4");
 				$no=1;
-				while ($r=mysql_fetch_array($tampil)){
+				while ($r=mysqli_fetch_array($tampil)){
 				$tgl=tgl_indo($r['tgl_lowongan']);
 				?>
 				<div class='isi_left'>
 				<img src="foto_lowongan/<?php echo $r['foto'];?>" width='50' height='50' />
-				<div class='title_perusahaan1'><b><? echo $r['nama_p'];?></b></div>
-				<? echo $tgl;?> - <? echo $r['alamat'];?><br>
-				<a href='?page=detail_lowongan&id=<? echo $r['id_lowongan'];?>&idp=<? echo $r['id_perusahaan'];?>'> Lihat Selengkapnya >> </a>
+				<div class='title_perusahaan1'><b><?php echo $r['nama_p'];?></b></div>
+				<?php echo $tgl;?> - <?php echo $r['alamat'];?><br>
+				<a href="?page=detail_lowongan&id=<?php echo $r['id_lowongan'];?>&idp=<?php echo $r['id_perusahaan'];?>"> Lihat Selengkapnya >> </a>
 				</div>	
-				<?
+				<?php
 				}
 				
 				?>
@@ -154,31 +155,31 @@ function MM_validateForm() { //v4.0
 			<?php
 			$page=$_GET['page'];
 			if($page=='registrasi'){
-			include"modul/mod_registrasi/registrasi.php";
+			include "modul/mod_registrasi/registrasi.php";
 			}
 			else if($page=='view_registrasi'){
-			include"modul/mod_registrasi/view_registrasi.php";
+			include "modul/mod_registrasi/view_registrasi.php";
 			}
 			else if($page=='setting_akun'){
-			include"modul/mod_registrasi/edit_akun.php";
+			include "modul/mod_registrasi/edit_akun.php";
 			}
 			else if($page=='profile'){
-			include"profile.php";
+			include "profile.php";
 			}
 			else if($page=='contact'){
-			include"contact.php";
+			include "contact.php";
 			}
 			else if($page=='lowongan'){
-			include"lowongan.php";
+			include "lowongan.php";
 			}
 			else if($page=='cari_lowongan'){
-			include"cari_lowongan.php";
+			include "cari_lowongan.php";
 			}
 			else if($page=='detail_lowongan'){
-			include"detail_lowongan.php";
+			include "detail_lowongan.php";
 			}
 			else if($page=='info'){
-			include"info_terbaru.php";
+			include "info_terbaru.php";
 			}
 			else if($page='home'){
 			?>
@@ -198,7 +199,11 @@ function MM_validateForm() { //v4.0
             <p class>&nbsp;</p>
             </div>
        	    </div>
-		<?}?>
+		<?php 
+
+	       }
+
+		?>
         </div> <!-- end of content right -->
         
         <div class="cleaner">&nbsp;</div>

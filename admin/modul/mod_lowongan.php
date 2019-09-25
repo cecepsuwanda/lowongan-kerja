@@ -1,15 +1,15 @@
 <?php
-error_reporting(0);
-switch($_GET['act']){
+
+switch(isset($_GET['act']) ? $_GET['act'] : ''){
   // Tampil lowongan
   default:
     echo "<h2>&#187; Daftar Lowongan</h2>
           <button type=button style='width:150px;padding:5px;text-align:center;' onclick=location.href='?module=lowongan&act=tambahlowongan'>Tambah Lowongan</button>
           <table width='985'>
           <tr><th>no</th><th>Nama Perusahaan</th><th>Lowongan</th><th>Tanggal Posting</th><th>User Posting</th><th>Aksi</th></tr>";
-    $tampil=mysql_query("SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan ORDER BY id_lowongan DESC");
+    $tampil=mysqli_query($connect,"SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan ORDER BY id_lowongan DESC");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
+    while ($r=mysqli_fetch_array($tampil)){
 	$idregis=$r['id_lowongan'];
       $tgl=tgl_indo($r['tgl_lowongan']);
       echo "<tr><td>$no</td>

@@ -38,7 +38,7 @@ function harusangka(jumlah){ // fungsi untuk harus angka pada text
 <img src="images/header1.jpg" width="1024" height="200">
 <nav id="topNav">
         	<ul>
-			<?
+			<?php
 			if($_SESSION['leveluser']=='admin'){
 			?>
               <li><a href="?module=home" ><img src="images/home.png" width='15' height='15' > Home</a></li>
@@ -48,14 +48,14 @@ function harusangka(jumlah){ // fungsi untuk harus angka pada text
               <li><a href="?module=perusahaan"><img src="images/daftar.png" width='15' height='15' > Data Perusahaan</a></li>
 			  <li><a href="?module=lowongan"><img src="images/lowongan.png" width='19' height='15' >  Lowongan</a></li>
 			  <li><a href="logout.php" class="last"><img src="images/logout.png" width='16' height='15' > Log Out</a></li>
-			  <?
+			  <?php
 			  }else{
 			  ?>
 			  <li><a href="?module=home" ><img src="images/home.png" width='15' height='15' > Home</a></li>
               <li><a href="?module=acount" ><img src="images/user.ico" width='15' height='15' > &nbsp;Setting Account</a> </li>
 			  <li><a href="?module=lowongan_perusahaan"><img src="images/lowongan.png" width='19' height='15' > Daftar Lowongan</a></li>
 			  <li><a href="logout.php" class="last"><img src="images/logout.png" width='16' height='15' > Log Out</a></li>
-			  <?
+			  <?php
 			  }
 			  ?>
 			</ul>

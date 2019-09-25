@@ -1,7 +1,8 @@
 <?php
-include "koneksi.php";
+include "config/koneksi.php";
 function anti_injection($data){
-  $filter = mysql_real_escape_string(stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
+  global $connect;
+  $filter = mysqli_real_escape_string($connect,stripslashes(strip_tags(htmlspecialchars($data,ENT_QUOTES))));
   return $filter;
 }
 
@@ -11,9 +12,9 @@ $pass_user     = anti_injection($_POST['password']);
 
 $level=$_POST['level'];
 if($level=='admin'){
-$login=mysql_query("SELECT * FROM user WHERE username='$username' AND password='$pass' ");
-$ketemu=mysql_num_rows($login);
-$r=mysql_fetch_array($login);
+$login=mysqli_query($connect,"SELECT * FROM user WHERE username='$username' AND password='$pass' ");
+$ketemu=mysqli_num_rows($login);
+$r=mysqli_fetch_array($login);
 // Apabila username dan password ditemukan
 if ($ketemu > 0){
   session_start();

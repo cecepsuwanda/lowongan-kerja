@@ -9,9 +9,9 @@
 		  <th>Telepon</th>
 		  <th>aksi</th></tr> 
 <?php		  
-    $tampil=mysql_query("SELECT * FROM perusahaan ORDER BY id_perusahaan");
+    $tampil=mysqli_query($connect,"SELECT * FROM perusahaan ORDER BY id_perusahaan");
     $no=1;
-    while ($r=mysql_fetch_array($tampil)){
+    while ($r=mysqli_fetch_array($tampil)){
 	$idregis=$r['id_perusahaan'];
 	 $tgl=tgl_indo($r['tgl_daftar']); 
        echo "<tr><td>$no</td>
