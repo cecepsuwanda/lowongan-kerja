@@ -47,9 +47,9 @@ else{
 }
 }
 else if($level=='user'){
-$login=mysql_query("SELECT * FROM registrasi WHERE email='$username' AND password='$pass_user' ");
-$ketemu=mysql_num_rows($login);
-$r=mysql_fetch_array($login);
+$login=mysqli_query($connect,"SELECT * FROM registrasi WHERE email='$username' AND password='$pass_user' ");
+$ketemu=mysqli_num_rows($login);
+$r=mysqli_fetch_array($login);
 // Apabila username dan password ditemukan
 if ($ketemu > 0){
   session_start();
@@ -65,7 +65,7 @@ if ($ketemu > 0){
   header('location:./?page=home');
 }
 else{
-  echo "<script>alert('Maaf, Password Dan Username Anda Tidak Benar');javascript:history.go(-1) </script>";
+  //echo "<script>alert('Maaf, Password Dan Username Anda Tidak Benar');javascript:history.go(-1) </script>";
 }
 }
 

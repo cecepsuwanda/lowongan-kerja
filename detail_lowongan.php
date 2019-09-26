@@ -18,8 +18,8 @@ if(empty($_SESSION['username'])){
 }
   else
      {
-        $cek=mysql_query("SELECT * FROM lamaran where id_lowongan='$_GET[id]' and id_perusahaan='$_GET[idp]' and id_registrasi='$_SESSION[id_registrasi]'");
-        $jml=mysql_num_rows($cek);
+        $cek=mysqli_query($connect,"SELECT * FROM lamaran where id_lowongan='$_GET[id]' and id_perusahaan='$_GET[idp]' and id_registrasi='$_SESSION[id_registrasi]'");
+        $jml=mysqli_num_rows($cek);
 ?>
      <table border='0' width='700'>
        <?php
@@ -40,9 +40,9 @@ if(empty($_SESSION['username'])){
                </a>
 <?php
              }
-                $tampil=mysql_query("SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan  and lowongan.id_lowongan='$_GET[id]'");
+                $tampil=mysqli_query($connect,"SELECT * FROM lowongan,perusahaan where lowongan.id_perusahaan=perusahaan.id_perusahaan  and lowongan.id_lowongan='$_GET[id]'");
                 $no=1;
-                $r=mysql_fetch_array($tampil);
+                $r=mysqli_fetch_array($tampil);
                 $tgl=tgl_indo($r['tgl_lowongan']);
 ?>
         <tr>

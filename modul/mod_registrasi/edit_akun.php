@@ -1,10 +1,10 @@
-<?
-error_reporting(0);
-$page=$_GET['page'];
-$update=$_GET['update'];
-$act=$_GET['act'];
-$sql=mysql_query("select * from registrasi where id_registrasi='$_SESSION[id_registrasi]'");
-$r=mysql_fetch_array($sql);
+<?php
+
+$page=isset($_GET['page']) ? $_GET['page'] :'';
+$update=isset($_GET['update']) ? $_GET['update'] : '';
+$act=isset($_GET['act']) ? $_GET['act'] :'';
+$sql=mysqli_query($connect,"select * from registrasi where id_registrasi='$_SESSION[id_registrasi]'");
+$r=mysqli_fetch_array($sql);
 
 if ($page='setting_akun' AND $update=='ok'){
 	//untuk memindahkan file ke tempat uploadan
@@ -40,17 +40,17 @@ if ($page='setting_akun' AND $update=='ok'){
 
 	?>
 <div style=\"font-size:14px;color:red\"><img src='images/loading.gif' width='400' height='50'><h3>Pelase Wait ...</h3></div>		
-<?			
+<?php			
 		if($sql){				   
 		?>  <br><br><center>
 			<meta http-equiv='refresh' content='2;URL=?page=setting_akun'>
 			</center>
-			<?
+			<?php
 		} else {
 			$error = "<div style=\"font-size:14px;color:red\">Data Gagal Disimpan</div>";?>
 			
 			<meta http-equiv='refresh' content='2;URL=?page=setting_akun'>
-			<?
+			<?php
 		}
 			//echo "<script>window.location = '?page=formulir'</script>";
 }else{
@@ -58,7 +58,7 @@ if ($page='setting_akun' AND $update=='ok'){
 <div class="content_title_01">My Account</div>
 <form method="post" action="?page=setting_akun&&update=ok" enctype='multipart/form-data' onSubmit="return validasi(this)">
 <table width='100%'>
-<?
+<?php
 if(!empty($r['foto'])){
 echo"<div class='foto'><img src='foto_calon/$r[foto]' width='130' height='160'></div>";
 }else{
@@ -69,7 +69,7 @@ echo"<div class='foto'><img src='images/nofoto.jpg' width='130' height='160'></d
 <tr><td> No Registrasi</td><td><input type='text' name='no_registrasi' value='<?php echo $_SESSION['id_registrasi'];?>' disabled></td></tr> 
 <tr><td> Nama Lengkap</td><td><input type='text' name='nm_lengkap' value='<?php echo $r['nama_lengkap'];?>' required></td></tr> 
 <tr><td height="48">Jenis Kelamin </td>
-<?
+<?php
 $jk=$r['jk'];
 if($jk=='pria'){
 ?>
@@ -77,17 +77,17 @@ if($jk=='pria'){
 <input name="jk" type="radio" checked value="pria"/>Pria
 <input name="jk" type="radio" value="wanita"/>Wanita
 </td>
-<?
+<?php
 }else{
 ?>
 <td>
 <input name="jk" type="radio"  value="pria"/>Pria
 <input name="jk" type="radio" checked value="wanita"/>Wanita
 </td>
-<?
+<?php
 }
 ?></tr>	
-<?
+<?php
 $vtgl=substr($r['tgl_lahir'],8,2);
 $vbln=substr($r['tgl_lahir'],5,2);
 $vthn=substr($r['tgl_lahir'],0,4);
@@ -159,4 +159,4 @@ else if($vbln==12){$vnm_bln="Desember";}
 </table>  
 </div>	
 </form>                            
-<?}?>
+<?php } ?>
