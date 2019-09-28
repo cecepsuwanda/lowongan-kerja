@@ -65,7 +65,7 @@ if ($ketemu > 0){
   header('location:./?page=home');
 }
 else{
-  //echo "<script>alert('Maaf, Password Dan Username Anda Tidak Benar');javascript:history.go(-1) </script>";
+  echo "<script>alert('Maaf, Password Dan Username Anda Tidak Benar');javascript:history.go(-1) </script>";
 }
 }
 
